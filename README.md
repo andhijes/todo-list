@@ -14,5 +14,5 @@ This mini project is about create taking note easely use for you to keep organiz
 
 ## How to runs project
 ```
-    npm install
+    npm start
 ```
