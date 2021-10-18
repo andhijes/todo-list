@@ -38,7 +38,7 @@ import taggingStore from './store/tagging';
         todosStore.setName(userStore.data.id);
         await todosStore.initialize();
         await taggingStore.initialize();
-        taggingStore.setTagListByUsername(taggingStore.data)
+        taggingStore.setTagListByUsername(taggingStore.data);
       }
     }
   

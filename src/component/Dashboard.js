@@ -49,7 +49,7 @@ import { cleanObject, isEmptyObject } from "../helper";
                 <span className="label">{`Tags: ${tags}`}</span>
 
             </div>
-        )
+        );
     }
 
     itemListEdit = (todoData = {}) => {
@@ -79,7 +79,7 @@ import { cleanObject, isEmptyObject } from "../helper";
               </span>
 
           </div>
-      )
+      );
   }
   
     render() {
@@ -108,7 +108,7 @@ import { cleanObject, isEmptyObject } from "../helper";
             </div>
             <div className="overflow-text gray">
                 <ul>
-                {todosStore.data.map((item, index) => (
+                {todosStore.data.map((item) => (
                     this.state.editId === item._id ?
                     <li key={item._id}>
                         {this.itemListEdit(item)}
@@ -137,7 +137,7 @@ import { cleanObject, isEmptyObject } from "../helper";
                    taggingStore.tagListByUsername.map((tag, id) => {
                       return (
                         <span key={id} >- {tag}</span>
-                      )
+                      );
                     })
                   }
           </div>
@@ -148,11 +148,11 @@ import { cleanObject, isEmptyObject } from "../helper";
     async componentDidMount() {
       this.unsubTodos = todosStore.subscribe(this.rerender);
       this.unsubTaging = taggingStore.subscribe(this.rerender);
-      taggingStore.setTagListByUsername(taggingStore.data)
+      taggingStore.setTagListByUsername(taggingStore.data);
     }
 
     componentDidUpdate() {
-      taggingStore.setTagListByUsername(taggingStore.data)
+      taggingStore.setTagListByUsername(taggingStore.data);
     }
   
     componentWillUnmount() {
@@ -177,7 +177,7 @@ import { cleanObject, isEmptyObject } from "../helper";
     addTodo = async (event) => {
       event.preventDefault();
       const {tags, title, dueDate} = this.state;
-      const listTags = tags && tags.split(',')
+      const listTags = tags && tags.split(',');
       
       await todosStore.addItem({
         title: title,
@@ -193,7 +193,7 @@ import { cleanObject, isEmptyObject } from "../helper";
   
     deleteTodo = async (id) => {
       if (id === this.state.editId) {
-          this.setState({editId: false})
+          this.setState({editId: false});
       } else {
         todosStore.deleteItem(id, userStore.data);
         this.updateToRemoteDB();
@@ -203,17 +203,17 @@ import { cleanObject, isEmptyObject } from "../helper";
     editTodo = async (id) => {
         this.setState({
             editId: id
-        })
+        });
       }
   
       submitUpdateTodo = async () => {
         const {editTitle, editDueDate, editTags} = this.state;
-        const listTags = editTags && editTags.split(',')
+        const listTags = editTags && editTags.split(',');
         const updatedData = {
           title: editTitle, 
           dueDate: editDueDate, 
           tags: listTags
-        }
+        };
 
         cleanObject(updatedData);
         
@@ -221,14 +221,14 @@ import { cleanObject, isEmptyObject } from "../helper";
             const updatedPayload = {
                 ...todosStore.ListDataToObject('_id')[this.state.editId],
                 ...updatedData
-            }
+            };
             
             await todosStore.editItem(this.state.editId, updatedPayload, userStore.data);
             if (listTags) {
               await taggingStore.updateTagsByUsername(userStore.data.username, listTags, userStore.data);
             }
             
-            this.updateToRemoteDB()
+            this.updateToRemoteDB();
         }
 
         this.setState({
@@ -236,7 +236,7 @@ import { cleanObject, isEmptyObject } from "../helper";
             editTitle: '',
             editDueDate: '',
             editTags: ''
-        })
+        });
       }
 
     updateToRemoteDB = async (isSync = false) => {
@@ -245,14 +245,14 @@ import { cleanObject, isEmptyObject } from "../helper";
         await todosStore.upload();
         await taggingStore.upload();
         if (isSync) {
-            alert('Sync Successfully')
+            alert('Sync Successfully');
         }
         console.log('upload done');
       } catch (err) {
         if (isSync) {
-            alert('Woops, something wrong please try again :)')
+            alert('Woops, something wrong please try again :)');
         }
-        console.log('error update', err)
+        console.log('error update', err);
         console.log('upload failed');
       }
     }
