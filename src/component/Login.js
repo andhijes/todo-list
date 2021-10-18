@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Button from "./Button";
-// import todosStore from '@/store/todos';
 import userStore from '../store/user';
 
  class BaseComponent extends Component {

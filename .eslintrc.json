@@ -1,7 +1,8 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "node": true
     },
     "extends": [
         "eslint:recommended",
@@ -11,8 +12,9 @@
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 12,
-        "sourceType": "module"
+        "ecmaVersion": 8,
+        "sourceType": "module",
+        "requireConfigFile": false
     },
     "plugins": [
         "react"
@@ -23,6 +25,7 @@
         "no-console": "warn",
         "no-alert": "warn",
         "prefer-const": ["error"],
-        "react/no-danger": 0
+        "react/no-danger": 0,
+        "react/prop-types": "off"
     }
 }

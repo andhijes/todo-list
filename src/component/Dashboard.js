@@ -156,7 +156,6 @@ import { cleanObject, isEmptyObject } from "../helper";
     }
   
     componentWillUnmount() {
-      console.log('ckckckcl')
       this.unsubTodos();
       this.unsubTaging();
 
@@ -217,10 +216,8 @@ import { cleanObject, isEmptyObject } from "../helper";
         }
 
         cleanObject(updatedData);
-        console.log(updatedData)
         
         if (!isEmptyObject(updatedData)) {
-            console.log('boleeh')
             const updatedPayload = {
                 ...todosStore.ListDataToObject('_id')[this.state.editId],
                 ...updatedData
@@ -243,7 +240,7 @@ import { cleanObject, isEmptyObject } from "../helper";
       }
 
     updateToRemoteDB = async (isSync = false) => {
-      console.log('uploading...');
+      console.log('upload to db');
       try {
         await todosStore.upload();
         await taggingStore.upload();
@@ -256,7 +253,6 @@ import { cleanObject, isEmptyObject } from "../helper";
             alert('Woops, something wrong please try again :)')
         }
         console.log('error update', err)
-          console.log(todosStore.ListDataToObject('_id'))
         console.log('upload failed');
       }
     }
